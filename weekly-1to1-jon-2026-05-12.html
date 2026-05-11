@@ -353,7 +353,67 @@
       gap: 8px;
     }
 
-    /* ─── RESPONSIVE · iPhone ─── */
+    /* ─── NOTES ─── */
+    .notes-area {
+      min-height: 160px;
+      width: 100%;
+      border: 1.5px solid var(--rule);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: var(--ink);
+      line-height: 1.65;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      background: var(--bg);
+    }
+
+    .notes-area:focus {
+      border-color: var(--accent1);
+      box-shadow: 0 0 0 3px rgba(91,91,214,0.1);
+      background: #ffffff;
+    }
+
+    .notes-area:empty::before {
+      content: attr(data-placeholder);
+      color: #b0b0be;
+      pointer-events: none;
+    }
+
+    .notes-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .notes-hint {
+      font-size: 0.72rem;
+      color: #b0b0be;
+    }
+
+    .notes-clear {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--sub);
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .notes-clear:hover {
+      background: #fdecea;
+      color: var(--accent3);
+      border-color: #f5c5bf;
+    }
+
+    @media (max-width: 430px) {
+      .notes-area { min-height: 120px; font-size: 0.82rem; }
+    }
     @media (max-width: 430px) {
 
       body {
@@ -773,7 +833,47 @@
 
   </main>
 
+    <!-- NOTES -->
+    <section class="card" style="max-width:860px; margin: 0 auto 40px; width: calc(100% - 48px);">
+      <div class="card-header">
+        <div class="card-icon" style="background:#f0f0ff;">✏️</div>
+        <div>
+          <div class="card-title">Notes</div>
+          <div class="card-subtitle">Jot things down as you go</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div
+          class="notes-area"
+          contenteditable="true"
+          spellcheck="true"
+          data-placeholder="Start typing your notes here…"
+        ></div>
+        <div class="notes-actions">
+          <span class="notes-hint">💾 Auto-saved to this browser</span>
+          <button class="notes-clear" onclick="clearNotes()">Clear</button>
+        </div>
+      </div>
+    </section>
 
+<script>
+  const STORAGE_KEY = 'jon-1to1-notes-2026-05-12';
+  const area = document.querySelector('.notes-area');
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) area.innerHTML = saved;
+
+  area.addEventListener('input', () => {
+    localStorage.setItem(STORAGE_KEY, area.innerHTML);
+  });
+
+  function clearNotes() {
+    if (confirm('Clear all notes?')) {
+      area.innerHTML = '';
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }
+</script>
 
 </body>
 </html>

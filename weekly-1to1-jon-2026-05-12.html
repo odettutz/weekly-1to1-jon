@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly 1:1 · Jon · 12 May 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+    :root {
+      --ink:       #1a1a1f;
+      --sub:       #5c5c6e;
+      --rule:      #e4e4ed;
+      --bg:        #f7f7fa;
+      --card:      #ffffff;
+      --accent1:   #5b5bd6;   /* indigo */
+      --accent2:   #0ea47a;   /* emerald */
+      --accent3:   #e85d4a;   /* coral */
+      --accent4:   #f5a623;   /* amber */
+      --pill-bg:   #ededfa;
+      --pill-txt:  #5b5bd6;
+      --done-bg:   #e6f7f1;
+      --done-txt:  #0ea47a;
+      --prog-bg:   #fff4e0;
+      --prog-txt:  #b96a00;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 0 0 80px;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--rule);
+      padding: 36px 48px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .header-left h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .header-left h1 span {
+      color: var(--accent1);
+    }
+
+    .header-left p {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: var(--sub);
+      font-weight: 400;
+    }
+
+    .header-meta {
+      text-align: right;
+    }
+
+    .date-badge {
+      display: inline-block;
+      background: var(--pill-bg);
+      color: var(--pill-txt);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    .week-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: var(--sub);
+      text-align: right;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ─── SECTION CARD ─── */
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 28px 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .card-icon.indigo  { background: var(--pill-bg); }
+    .card-icon.emerald { background: var(--done-bg); }
+    .card-icon.coral   { background: #fdecea; }
+    .card-icon.amber   { background: var(--prog-bg); }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.2px;
+    }
+
+    .card-subtitle {
+      font-size: 0.78rem;
+      color: var(--sub);
+      margin-top: 1px;
+    }
+
+    .card-body {
+      padding: 20px 28px 24px;
+    }
+
+    /* ─── RADIO STATIONS TABLE ─── */
+    .stations-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .station-row {
+      display: grid;
+      grid-template-columns: 24px 1fr 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--rule);
+      font-size: 0.82rem;
+      transition: background 0.15s;
+    }
+
+    .station-row:hover {
+      background: var(--bg);
+    }
+
+    .station-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--sub);
+      text-align: center;
+    }
+
+    .station-uni {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .station-name {
+      color: var(--sub);
+    }
+
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 12px;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-done  { background: var(--done-bg);  color: var(--done-txt); }
+    .badge-sent  { background: var(--pill-bg);  color: var(--pill-txt); }
+    .badge-none  { display: none; }
+
+    /* ─── CONNECTION HIGHLIGHT ─── */
+    .connection-box {
+      background: linear-gradient(135deg, #f0f0ff 0%, #e8f9f3 100%);
+      border: 1px solid #d4d4f5;
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .connection-emoji {
+      font-size: 1.4rem;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .connection-box h3 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .connection-box p {
+      font-size: 0.8rem;
+      color: var(--sub);
+      line-height: 1.5;
+    }
+
+    .connection-box .via-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent1);
+      background: var(--pill-bg);
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+
+    /* ─── PROGRESS ITEMS ─── */
+    .progress-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .progress-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .dot-indigo  { background: var(--accent1); }
+    .dot-emerald { background: var(--accent2); }
+    .dot-amber   { background: var(--accent4); }
+
+    .progress-content h3 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .progress-content p {
+      font-size: 0.8rem;
+      color: var(--sub);
+      line-height: 1.5;
+    }
+
+    /* ─── CURATOR TIMELINE ─── */
+    .curator-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .curator-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .curator-org {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .timeline-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .timeline-step {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.76rem;
+      color: var(--sub);
+    }
+
+    .timeline-step .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-done   { background: var(--accent2); }
+    .dot-prog   { background: var(--accent4); }
+
+    .curator-status {
+      text-align: right;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      font-size: 0.72rem;
+      color: #b0b0be;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ────────── HEADER ────────── -->
+  <header>
+    <div class="header-left">
+      <h1>Weekly 1:1 <span>· Jon</span></h1>
+      <p>Connection Sheet — prepared by Andreea</p>
+    </div>
+    <div class="header-meta">
+      <span class="date-badge">📅 Tuesday, 12 May 2026</span>
+      <span class="week-label">Week 20 · 2026</span>
+    </div>
+  </header>
+
+  <!-- ────────── MAIN CONTENT ────────── -->
+  <main class="container">
+
+    <!-- A · RADIO OUTREACH -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon indigo">📻</div>
+        <div>
+          <div class="card-title">A · Radio Station Outreach</div>
+          <div class="card-subtitle">17 stations contacted · 3 already answered back</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="stations-grid">
+
+          <div class="station-row">
+            <span class="station-num">1</span>
+            <span class="station-uni">Birmingham</span>
+            <span class="station-name">Burn FM</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">2</span>
+            <span class="station-uni">Birmingham City University</span>
+            <span class="station-name">Scratch Radio</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">3</span>
+            <span class="station-uni">Bournemouth University</span>
+            <span class="station-name">Nerve Radio</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">4</span>
+            <span class="station-uni">Bristol</span>
+            <span class="station-name">Burst Radio</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">5</span>
+            <span class="station-uni">Cambridge &amp; Anglia Ruskin University</span>
+            <span class="station-name">Cam FM</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">6</span>
+            <span class="station-uni">Cardiff University</span>
+            <span class="station-name">Xpress Radio</span>
+            <span class="badge badge-done">✓ Replied</span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">7</span>
+            <span class="station-uni">Fife &amp; Edinburgh College</span>
+            <span class="station-name">Boom Radio</span>
+            <span class="badge badge-done">✓ Replied</span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">8</span>
+            <span class="station-uni">King's College London</span>
+            <span class="station-name">KCL Radio</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">9</span>
+            <span class="station-uni">Manchester</span>
+            <span class="station-name">Fuse FM</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">10</span>
+            <span class="station-uni">Newcastle University</span>
+            <span class="station-name">NSR</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">11</span>
+            <span class="station-uni">University College London</span>
+            <span class="station-name">Rare FM</span>
+            <span class="badge badge-done">✓ Replied</span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">12</span>
+            <span class="station-uni">Nottingham</span>
+            <span class="station-name">University Radio Nottingham (URN)</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">13</span>
+            <span class="station-uni">Portsmouth</span>
+            <span class="station-name">Pure FM</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">14</span>
+            <span class="station-uni">Royal Holloway, University of London</span>
+            <span class="station-name">Insanity Radio</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">15</span>
+            <span class="station-uni">Sunderland</span>
+            <span class="station-name">Spark Sunderland</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">16</span>
+            <span class="station-uni">Warwick</span>
+            <span class="station-name">RAW</span>
+            <span class="badge-none"></span>
+          </div>
+
+          <div class="station-row">
+            <span class="station-num">17</span>
+            <span class="station-uni">York</span>
+            <span class="station-name">URY</span>
+            <span class="badge-none"></span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- B · LIVERPOOL CONNECTION -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon emerald">🤝</div>
+        <div>
+          <div class="card-title">B · Liverpool John Moores University</div>
+          <div class="card-subtitle">Moore Student Radio — Connection made</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="connection-box">
+          <div class="connection-emoji">🎙️</div>
+          <div>
+            <h3>Moore Student Radio — In Conversation</h3>
+            <p>Already in active conversation with the station. Connection established through a warm introduction.</p>
+            <div>
+              <span class="via-tag">🔗 Via Rachel — Director, Liverpool School of Art &amp; Creative Industries</span>
+              <span class="via-tag" style="margin-left:4px;">🔗 Via Tom</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- C · PROJECT REPORT -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon coral">📄</div>
+        <div>
+          <div class="card-title">C · Project Report</div>
+          <div class="card-subtitle">Drafts ready to review at today's 1:1</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="progress-item">
+          <span class="progress-dot dot-emerald"></span>
+          <div class="progress-content">
+            <h3>Project Report — Complete ✅</h3>
+            <p>Full report finished and ready for review.</p>
+          </div>
+        </div>
+        <div class="progress-item">
+          <span class="progress-dot dot-emerald"></span>
+          <div class="progress-content">
+            <h3>Evidence Document — Complete ✅</h3>
+            <p>Supporting evidence compiled and attached.</p>
+          </div>
+        </div>
+        <div class="progress-item">
+          <span class="progress-dot dot-emerald"></span>
+          <div class="progress-content">
+            <h3>Referencing Table — Complete ✅</h3>
+            <p>All references cross-checked and formatted.</p>
+          </div>
+        </div>
+        <div style="margin-top:14px; padding:12px 16px; background:var(--done-bg); border-radius:10px; font-size:0.8rem; color:var(--done-txt); font-weight:500;">
+          🗂️ Will have the drafts to show at the 1:1 today.
+        </div>
+      </div>
+    </section>
+
+    <!-- D · CURATOR PROFILES -->
+    <section class="card">
+      <div class="card-header">
+        <div class="card-icon amber">🎨</div>
+        <div>
+          <div class="card-title">D · Curator Profiles Phase 2</div>
+          <div class="card-subtitle">2 organisations engaged</div>
+        </div>
+      </div>
+      <div class="card-body">
+
+        <!-- ACM -->
+        <div class="curator-item">
+          <div>
+            <div class="curator-org">ACM</div>
+            <div class="timeline-steps">
+              <div class="timeline-step">
+                <span class="dot dot-done"></span>
+                Agreement confirmed
+              </div>
+              <div class="timeline-step">
+                <span class="dot dot-done"></span>
+                Assets &amp; contract sent — 26 March
+              </div>
+              <div class="timeline-step">
+                <span class="dot dot-done"></span>
+                Assets &amp; contract signed — 21 April
+              </div>
+              <div class="timeline-step">
+                <span class="dot dot-prog"></span>
+                RADAR — In progress (7 May)
+              </div>
+            </div>
+          </div>
+          <div class="curator-status">
+            <span class="badge" style="background:var(--prog-bg);color:var(--prog-txt);">🔄 RADAR in progress</span>
+          </div>
+        </div>
+
+        <!-- Leeds Conservatoire -->
+        <div class="curator-item">
+          <div>
+            <div class="curator-org">Leeds Conservatoire</div>
+            <div class="timeline-steps">
+              <div class="timeline-step">
+                <span class="dot dot-done"></span>
+                Agreement confirmed
+              </div>
+              <div class="timeline-step">
+                <span class="dot dot-done"></span>
+                Assets &amp; contract sent — 1 May
+              </div>
+            </div>
+          </div>
+          <div class="curator-status">
+            <span class="badge badge-sent">📤 Awaiting signature</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ────────── FOOTER ────────── -->
+  <footer>
+    <span>Weekly 1:1 · Jon &amp; Andreea · Tuesday 12 May 2026</span>
+    <span>Prepared with ♥ using Enchanté</span>
+  </footer>
+
+</body>
+</html>

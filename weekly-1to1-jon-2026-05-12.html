@@ -93,12 +93,17 @@
 
     /* ─── LAYOUT ─── */
     .container {
-      max-width: 860px;
+      max-width: 1160px;
       margin: 40px auto;
       padding: 0 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 780px) {
+      .container { grid-template-columns: 1fr; }
     }
 
     /* ─── SECTION CARD ─── */
@@ -368,12 +373,12 @@
   <!-- ────────── MAIN CONTENT ────────── -->
   <main class="container">
 
-    <!-- A · RADIO OUTREACH -->
+    <!-- 1 · RADIO OUTREACH -->
     <section class="card">
       <div class="card-header">
         <div class="card-icon indigo">📻</div>
         <div>
-          <div class="card-title">A · Radio Station Outreach</div>
+          <div class="card-title">1 · Radio Station Outreach</div>
           <div class="card-subtitle">17 stations contacted · 3 already answered back</div>
         </div>
       </div>
@@ -503,12 +508,12 @@
       </div>
     </section>
 
-    <!-- B · LIVERPOOL CONNECTION -->
+    <!-- 2 · LIVERPOOL CONNECTION -->
     <section class="card">
       <div class="card-header">
         <div class="card-icon emerald">🤝</div>
         <div>
-          <div class="card-title">B · Liverpool John Moores University</div>
+          <div class="card-title">2 · Liverpool John Moores University</div>
           <div class="card-subtitle">Moore Student Radio — Connection made</div>
         </div>
       </div>
@@ -527,12 +532,12 @@
       </div>
     </section>
 
-    <!-- C · PROJECT REPORT -->
+    <!-- 3 · PROJECT REPORT -->
     <section class="card">
       <div class="card-header">
         <div class="card-icon coral">📄</div>
         <div>
-          <div class="card-title">C · Project Report</div>
+          <div class="card-title">3 · Project Report</div>
           <div class="card-subtitle">Drafts ready to review at today's 1:1</div>
         </div>
       </div>
@@ -564,12 +569,12 @@
       </div>
     </section>
 
-    <!-- D · CURATOR PROFILES -->
+    <!-- 4 · CURATOR PROFILES -->
     <section class="card">
       <div class="card-header">
         <div class="card-icon amber">🎨</div>
         <div>
-          <div class="card-title">D · Curator Profiles Phase 2</div>
+          <div class="card-title">4 · Curator Profiles Phase 2</div>
           <div class="card-subtitle">2 organisations engaged</div>
         </div>
       </div>
